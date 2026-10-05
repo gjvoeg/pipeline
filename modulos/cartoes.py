@@ -15,8 +15,8 @@ def consultar_fatura(numero_cartao):
     """Consulta a fatura de um cartão. VULNERÁVEL: concatenação direta
     do parâmetro na string SQL."""
     conn = sqlite3.connect("cartoes.db")
-    query = "SELECT fatura FROM cartoes WHERE numero = '" + numero_cartao + "'"
-    cursor = conn.execute(query)
+    query = "SELECT fatura FROM cartoes WHERE numero = ?" 
+    cursor.execute(query, (numero_cartao,))
     return cursor.fetchone()
 
 
@@ -25,5 +25,5 @@ def buscar_cartoes_cliente():
     f-string para montar a query com entrada do usuário."""
     cpf = request.args.get("cpf")
     conn = sqlite3.connect("cartoes.db")
-    sql = f"SELECT * FROM cartoes WHERE cpf_titular = '{cpf}'"
-    return conn.execute(sql).fetchall()
+    sql = "SELECT * FROM cartoes WHERE cpf_titular = ?"
+    return conn.execute(sql,(cpf,)).fetchall()
