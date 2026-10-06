@@ -1,3 +1,4 @@
+
 name: Pipeline Seguro CI/CD - DevSecOps
 
 on:
@@ -60,8 +61,8 @@ jobs:
             --config=p/owasp-top-ten \
             --config=p/security-audit \
             --config=p/secrets \
-            --json --output=semgrep-results.json 
-            
+            --json --output=semgrep-results.json
+
       - name: Avaliar a politica de portao (bloqueia so em ERROR)
         run: |
           ERROS=$(jq '[.results[] | select(.extra.severity=="ERROR")] | length' semgrep-results.json)
@@ -309,4 +310,3 @@ jobs:
         run: |
           echo "Aqui entraria a chamada ao seu webhook de notificacao."
           echo 'curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Pipeline falhou\"}" $SLACK_WEBHOOK_URL'
- 
