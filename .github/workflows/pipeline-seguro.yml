@@ -120,8 +120,9 @@ jobs:
       - name: Trivy - bloqueia em CRITICAL/HIGH
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          scan-type: 'image'
+          scanners: 'vuln'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
           format: 'sarif'
@@ -131,8 +132,9 @@ jobs:
         if: always()
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          scan-type: 'image'
+          scanners: 'vuln'
           severity: 'MEDIUM,LOW'
           exit-code: '0'
           format: 'table'
