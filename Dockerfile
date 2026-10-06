@@ -8,15 +8,16 @@
 # O código da aplicação, propositalmente, continua com as
 # vulnerabilidades estudadas nos laboratórios de SonarQube e Semgrep.
 
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
 COPY requirements.txt .
 RUN apt-get update \
-	&& pip install --no-cache-dir -r requirements.txt \
-	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
+        && apt-get upgrade -y \
+        && pip install --no-cache-dir -r requirements.txt \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
