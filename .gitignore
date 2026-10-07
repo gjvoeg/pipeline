@@ -1,3 +1,8 @@
 leaks.json
+<<<<<<< HEAD
 semgrep-results.json
 .gitignore
+=======
+.gitignore
+semgrep-results.json
+>>>>>>> professor/main
