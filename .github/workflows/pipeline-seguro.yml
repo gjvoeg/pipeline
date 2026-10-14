@@ -14,7 +14,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: tabataduarte/pipeline
 
 jobs:
 
@@ -60,7 +60,7 @@ jobs:
             --config=p/owasp-top-ten \
             --config=p/security-audit \
             --config=p/secrets \
-            --json --output=semgrep-results.json
+            --json --output=semgrep-results.json 
 
       - name: Avaliar a politica de portao (bloqueia so em ERROR)
         run: |
@@ -121,7 +121,7 @@ jobs:
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
-          scan-ref: '.'          
+          scan-ref: '.'
           scanners: 'vuln'
           severity: 'CRITICAL,HIGH'
           exit-code: '1'
@@ -134,7 +134,7 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          scanners: 'vuln'
+          scannners: 'vuln'
           severity: 'MEDIUM,LOW'
           exit-code: '0'
           format: 'table'
@@ -310,3 +310,4 @@ jobs:
         run: |
           echo "Aqui entraria a chamada ao seu webhook de notificacao."
           echo 'curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Pipeline falhou\"}" $SLACK_WEBHOOK_URL'
+
