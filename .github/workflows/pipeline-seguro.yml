@@ -14,7 +14,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: tabataduarte/pipeline
+  IMAGE_NAME: gjvoeg/pipeline
 
 jobs:
 
@@ -310,4 +310,4 @@ jobs:
         run: |
           echo "Aqui entraria a chamada ao seu webhook de notificacao."
           echo 'curl -X POST -H "Content-type: application/json" --data "{\"text\":\"Pipeline falhou\"}" $SLACK_WEBHOOK_URL'
-
+ 
